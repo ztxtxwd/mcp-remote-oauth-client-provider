@@ -95,11 +95,7 @@ export class OAuthClientProvider implements IOAuthClientProvider {
     }
     
     // Try to get existing tokens
-    let existingTokens = await this.tokenStorage.getTokens(this.serverUrlHash);
-    
-    if (existingTokens && existingTokens.refresh_token) {
-      existingTokens = await this.refreshTokens(existingTokens.refresh_token);
-    }
+    const existingTokens = await this.tokenStorage.getTokens(this.serverUrlHash);
     
     if (DEBUG) debugLog('Existing tokens:', existingTokens ? 'Found' : 'Not found');
     
